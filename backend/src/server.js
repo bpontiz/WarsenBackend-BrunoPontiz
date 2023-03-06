@@ -1,5 +1,6 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
+import productsRouter from './routers/productsRouter/productsRouter.js';
 
 dotenv.config();
 
@@ -11,8 +12,15 @@ app.use(express.json());
 
 app.use(express.urlencoded( { extended: true }));
 
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send(`BACKEND APP`);
+});
+
+app.use('/products', productsRouter);
+
+app.get('*', (req, res) => {
+    const url = req.url;
+    res.send(`404 ERR - No resource has been found at: <br><strong>${url}</strong></br>`);
 });
 
 const server = app.listen(port, () => console.log(`Server is running at http://localhost:${port}`));
