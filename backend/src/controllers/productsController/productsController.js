@@ -2,11 +2,6 @@ import { getAll, addNew, getOne, deleteOne, updateOne } from '../../services/pro
 
 const productsController = {};
 
-function getId(req) {
-    const id = Number(req.params.id);
-    return id;
-};
-
 productsController.getProducts = async (req, res) => {
     const getProducts = await getAll();
     res.json(getProducts);
@@ -15,22 +10,25 @@ productsController.getProducts = async (req, res) => {
 productsController.postProduct = async (req, res) => {
     const product = req.body;
     await addNew(product);
-    res.redirect('/');
+    res.json(product);
 };
 
 productsController.getProductById = async (req, res) => {
-    const getProduct = await getOne(getId);
+    const id = Number(req.params.id);
+    const getProduct = await getOne(id);
     res.json(getProduct);
 };
 
 productsController.deleteProductById = async (req, res) => {
-    const deletedProduct = await deleteOne(getId);
+    const id = Number(req.params.id);
+    const deletedProduct = await deleteOne(id);
     res.json(deletedProduct);
 };
 
 productsController.updateProductById = async (req, res) => {
+    const id = Number(req.params.id);
     const newProduct = req.body;
-    const updatedProduct = await updateOne(getId, newProduct);
+    const updatedProduct = await updateOne(id, newProduct);
     res.json(updatedProduct);
 };
 

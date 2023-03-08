@@ -1,7 +1,6 @@
 import DbClient from './mongoDbClient.js';
 import ConfigProducts from './configProductsDb.js';
 import mongoose from 'mongoose';
-import CustomError from '../../../models/dao/errors/customError.js';
 
 class MongoClient extends DbClient {
     constructor() {
@@ -14,15 +13,12 @@ class MongoClient extends DbClient {
         try {
             await this.client.connect(ConfigProducts.db.cnxStr + ConfigProducts.db.name, {
                 useNewUrlParser: true,
-                useUnifiedTopology: true,
-                useFindAndModify: false,
-                useCreateIndex: true
             });
             console.log('Database has been successfully connected.');
             this.connected = true;
 
         } catch (error) {
-            throw new CustomError(500, 'MONGO CONNECTION ERR!: ', error);
+            console.log('MONGO CONNECTION ERR!: ', error);
         }
     };
 
@@ -33,7 +29,7 @@ class MongoClient extends DbClient {
             this.connected = false;
 
         } catch (error) {
-            throw new CustomError(500, 'MONGO CONNECTION ERR!: ', error);
+            console.log('MONGO CONNECTION ERR!: ', error);
         }
     }
 

@@ -1,12 +1,9 @@
-import CustomError from '../errors/customError.js';
-import ProductsDao from './productsDao.js';
-import ConfigProducts from '../../../dbconnections/mongo/products/configProducts.js';
+import ConfigProducts from '../../../dbconnections/mongo/products/configProductsDb.js';
 import MongoClient from '../../../dbconnections/mongo/products/mongoDbConnection.js';
 import productModel from '../../mongo/productsMongoModel.js';
 
-class ProductsDaoDb extends ProductsDao {
+class ProductsDaoDb {
     constructor() {
-        super()
         this.client = new MongoClient()
         this.client.connect()
         this.projection = ConfigProducts.db.projection
@@ -19,7 +16,7 @@ class ProductsDaoDb extends ProductsDao {
         }
 
         catch (err) {
-            throw new CustomError(500, 'ERR! Could not get products.', err)
+            console.log('ERR! Could not get products.', err);
         }
     };
 
@@ -31,11 +28,11 @@ class ProductsDaoDb extends ProductsDao {
         }
 
         catch (err) {
-            throw new CustomError(500, 'ERR! Could not get product.', err);
+            console.log('ERR! Could not get product.', err);
         }
 
         if (!searched) {
-            throw new CustomError(404, `ERR! Could not get product with id = ${id}`, err);
+            console.log(`ERR! Product with id = ${id} does not exist.`);
         };
 
         return [searched];
@@ -47,7 +44,7 @@ class ProductsDaoDb extends ProductsDao {
         }
 
         catch (err) {
-            throw new CustomError(500, 'ERR! Could not add new product.', err);
+            console.log('ERR! Could not add new product.', err);
         }
     };
 
@@ -58,11 +55,11 @@ class ProductsDaoDb extends ProductsDao {
         }
 
         catch (err) {
-            throw new CustomError(500, 'ERR! Could not delete product.', err);
+            console.log('ERR! Could not delete product.', err);
         }
 
         if (!deleted.deletedCount == 0) {
-            throw new CustomError(500, `ERR! Could not find product with id = ${id}`, err);
+            console.log(`ERR! Could not find product with id = ${id}`);
         }
     };
 
@@ -74,11 +71,11 @@ class ProductsDaoDb extends ProductsDao {
         }
 
         catch (err) {
-            throw new CustomError(500, `ERR! Could not update product.`, err);
+            console.log(`ERR! Could not update product.`, err);
         }
 
         if (!result) {
-            throw new CustomError(404, `ERR! Could not find product with id = ${id}`, { id });
+            console.log(`ERR! Could not find product with id = ${id}`, { id });
         }
 
         return newProduct;
