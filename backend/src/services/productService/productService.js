@@ -16,6 +16,6 @@ export async function deleteOne(id) {
     return await ProductsDaoDb.deleteProduct(id);
 };
 
-export async function updateOne(id) {
-    return await ProductsDaoDb.updateProduct(id);
+export async function updateOne(id, newProduct) {
+    return await ProductsDaoDb.updateProduct(id, newProduct);
 };

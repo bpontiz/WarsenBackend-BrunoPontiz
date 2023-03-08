@@ -29,7 +29,8 @@ productsController.deleteProductById = async (req, res) => {
 };
 
 productsController.updateProductById = async (req, res) => {
-    const updatedProduct = await updateOne(getId);
+    const newProduct = req.body;
+    const updatedProduct = await updateOne(getId, newProduct);
     res.json(updatedProduct);
 };
 
