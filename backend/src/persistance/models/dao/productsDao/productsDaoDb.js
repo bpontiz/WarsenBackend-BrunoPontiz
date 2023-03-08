@@ -34,12 +34,11 @@ class ProductsDaoDb extends ProductsDao {
             throw new CustomError(500, 'ERR! Could not get product.', err);
         }
 
-        finally {
-            if (!searched) {
-                throw new CustomError(404, `ERR! Could not get product with id = ${id}`, err);
-            }
-            return [searched];
-        }
+        if (!searched) {
+            throw new CustomError(404, `ERR! Could not get product with id = ${id}`, err);
+        };
+
+        return [searched];
     };
 
     async saveProduct(product) {
@@ -62,10 +61,8 @@ class ProductsDaoDb extends ProductsDao {
             throw new CustomError(500, 'ERR! Could not delete product.', err);
         }
 
-        finally {
-            if (!deleted.deletedCount == 0) {
-                throw new CustomError(500, `ERR! Could not find product with id = ${id}`, err);
-            }
+        if (!deleted.deletedCount == 0) {
+            throw new CustomError(500, `ERR! Could not find product with id = ${id}`, err);
         }
     };
 
@@ -74,8 +71,9 @@ class ProductsDaoDb extends ProductsDao {
 
         try {
             result = await productos.findOneAndReplace({ idInventary: id }, newProduct, this.projection);
+        }
 
-        } catch (err) {
+        catch (err) {
             throw new CustomError(500, `ERR! Could not update product.`, err);
         }
 
