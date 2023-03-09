@@ -1,4 +1,4 @@
-import ProductsDaoDb from '../../persistance/models/dao/productsDao/ProductsDaoDb.js';
+import ProductsDaoDb from '../../persistance/models/dao/productsDao/productsDaoDb.js';
 
 const productsDaoDb = new ProductsDaoDb();
 

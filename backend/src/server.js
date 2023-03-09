@@ -1,6 +1,7 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
 import productsRouter from './routers/productsRouter/productsRouter.js';
+import usersRouter from './routers/usersRouter/usersRouter.js';
 
 dotenv.config();
 
@@ -16,7 +17,9 @@ app.get('/', (req, res) => {
     res.send(`BACKEND APP`);
 });
 
-app.use('/products', productsRouter);
+app.use('/api/products', productsRouter);
+
+app.use('/api/users', usersRouter);
 
 app.get('*', (req, res) => {
     const url = req.url;
