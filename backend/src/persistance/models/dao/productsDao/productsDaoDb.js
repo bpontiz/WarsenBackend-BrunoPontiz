@@ -50,24 +50,32 @@ class ProductsDaoDb {
 
     async deleteProduct(id) {
         let deleted;
+        let searched;
+
         try {
+            searched = await productModel.findOne({ idInventary: id }, this.projection);
             deleted = await productModel.deleteOne({ idInventary: id });
+            deleted.deletedCount != 0 ?
+                console.log(`Product with id = ${id} successfully deleted.`) :
+                null;
         }
 
         catch (err) {
             console.log('ERR! Could not delete product.', err);
         }
 
-        if (!deleted.deletedCount == 0) {
+        if (!searched) {
             console.log(`ERR! Could not find product with id = ${id}`);
         }
+
+        return searched;
     };
 
     async updateProduct(id, newProduct) {
         let result;
 
         try {
-            result = await productos.findOneAndReplace({ idInventary: id }, newProduct, this.projection);
+            result = await productModel.findOneAndReplace({ idInventary: id }, newProduct);
         }
 
         catch (err) {
