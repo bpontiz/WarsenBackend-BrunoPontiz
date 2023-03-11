@@ -35,7 +35,7 @@ class ProductsDaoDb {
             console.log(`ERR! Product with id = ${id} does not exist.`);
         };
 
-        return [searched];
+        return searched;
     };
 
     async saveProduct(product) {
@@ -84,6 +84,10 @@ class ProductsDaoDb {
 
         if (!result) {
             console.log(`ERR! Could not find product with id = ${id}`, { id });
+        }
+
+        else {
+            console.log(`Product with id = ${id} successfully updated.`);
         }
 
         return newProduct;

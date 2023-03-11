@@ -1,5 +1,5 @@
 import DbClient from './mongoDbClient.js';
-import ConfigProductsDb from './configProductsDb.js';
+import ConfigUsersDb from './configUsersDb.js';
 import mongoose from 'mongoose';
 
 class MongoClient extends DbClient {
@@ -11,10 +11,10 @@ class MongoClient extends DbClient {
 
     async connect() {
         try {
-            await this.client.connect(ConfigProductsDb.db.cnxStr + ConfigProductsDb.db.name, {
+            await this.client.connect(ConfigUsersDb.db.cnxStr + ConfigUsersDb.db.name, {
                 useNewUrlParser: true,
             });
-            console.log(`Database collection ${ConfigProductsDb.db.collection} has been successfully connected.`);
+            console.log(`Database collection ${ConfigUsersDb.db.collection} has been successfully connected.`);
             this.connected = true;
 
         } catch (error) {

@@ -6,7 +6,7 @@ const dbName = process.env.DB_NAME || 'test1';
 
 const connectionString = process.env.DB_URL || 'mongodb://localhost:27017/';
 
-const ConfigProducts = {
+const ConfigProductsDb = {
     db: {
         name: dbName,
         collection: 'products',
@@ -16,4 +16,4 @@ const ConfigProducts = {
     }
 };
 
-export default ConfigProducts;
+export default ConfigProductsDb;
