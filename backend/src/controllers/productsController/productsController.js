@@ -14,19 +14,19 @@ productsController.postProduct = async (req, res) => {
 };
 
 productsController.getProductById = async (req, res) => {
-    const id = Number(req.params.id);
+    const id = req.params._id;
     const getProduct = await getOne(id);
     res.json(getProduct);
 };
 
 productsController.deleteProductById = async (req, res) => {
-    const id = Number(req.params.id);
+    const id = req.params._id;
     const deletedProduct = await deleteOne(id);
     res.json(deletedProduct);
 };
 
 productsController.updateProductById = async (req, res) => {
-    const id = Number(req.params.id);
+    const id = req.params._id;
     const newProduct = req.body;
     const updatedProduct = await updateOne(id, newProduct);
     res.json(updatedProduct);

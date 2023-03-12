@@ -24,7 +24,7 @@ class ProductsDaoDb {
         let searched;
 
         try {
-            searched = await productModel.findOne({ idInventary: id }, this.projection);
+            searched = await productModel.findOne({ _id: id }, this.projection);
         }
 
         catch (err) {
@@ -40,7 +40,9 @@ class ProductsDaoDb {
 
     async saveProduct(product) {
         try {
-            return await productModel.create(product);
+            await productModel.create(product);
+            console.log(`Product ${product.name} successfully added.`);
+            return product;
         }
 
         catch (err) {
@@ -53,8 +55,8 @@ class ProductsDaoDb {
         let searched;
 
         try {
-            searched = await productModel.findOne({ idInventary: id }, this.projection);
-            deleted = await productModel.deleteOne({ idInventary: id });
+            searched = await productModel.findOne({ _id: id }, this.projection);
+            deleted = await productModel.deleteOne({ _id: id });
             deleted.deletedCount != 0 ?
                 console.log(`Product with id = ${id} successfully deleted.`) :
                 null;
@@ -75,7 +77,7 @@ class ProductsDaoDb {
         let result;
 
         try {
-            result = await productModel.findOneAndReplace({ idInventary: id }, newProduct);
+            result = await productModel.findOneAndReplace({ _id: id }, newProduct);
         }
 
         catch (err) {
