@@ -7,10 +7,10 @@ usersRouter.get('/', usersController.getUsers);
 
 usersRouter.post('/', usersController.postUser);
 
-usersRouter.get('/:id', usersController.getUserById);
+usersRouter.get('/:_id', usersController.getUserById);
 
-usersRouter.delete('/:id', usersController.deleteUserById);
+usersRouter.delete('/:_id', usersController.deleteUserById);
 
-usersRouter.put('/:id', usersController.updateUserById);
+usersRouter.put('/:_id', usersController.updateUserById);
 
 export default usersRouter;

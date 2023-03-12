@@ -25,7 +25,7 @@ class UsersDaoDb {
         let searched;
 
         try {
-            searched = await userModel.findOne({ idUser: id }, this.projection);
+            searched = await userModel.findOne({ _id: id }, this.projection);
         }
 
         catch (err) {
@@ -54,8 +54,8 @@ class UsersDaoDb {
         let searched;
 
         try {
-            searched = await userModel.findOne({ idUser: id }, this.projection);
-            deleted = await userModel.deleteOne({ idUser: id });
+            searched = await userModel.findOne({ _id: id }, this.projection);
+            deleted = await userModel.deleteOne({ _id: id });
             deleted.deletedCount != 0 ?
                 console.log(`User with id = ${id} successfully deleted.`) :
                 null;
@@ -76,7 +76,7 @@ class UsersDaoDb {
         let result;
 
         try {
-            result = await userModel.findOneAndReplace({ idUser: id }, newUser);
+            result = await userModel.findOneAndReplace({ _id: id }, newUser);
         }
 
         catch (err) {

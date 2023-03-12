@@ -10,23 +10,23 @@ usersController.getUsers = async (req, res) => {
 usersController.postUser = async (req, res) => {
     const user = req.body;
     await addNew(user);
-    res.json(user);
+    res.redirect('http://localhost:3000/');
 };
 
 usersController.getUserById = async (req, res) => {
-    const id = Number(req.params.id);
+    const id = req.params._id;
     const getUser = await getOne(id);
     res.json(getUser);
 };
 
 usersController.deleteUserById = async (req, res) => {
-    const id = Number(req.params.id);
+    const id = req.params._id;
     const deletedUser = await deleteOne(id);
     res.json(deletedUser);
 };
 
 usersController.updateUserById = async (req, res) => {
-    const id = Number(req.params.id);
+    const id = req.params._id;
     const newUser = req.body;
     const updatedUser = await updateOne(id, newUser);
     res.json(updatedUser);
