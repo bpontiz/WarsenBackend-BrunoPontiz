@@ -1,23 +1,25 @@
-import UsersDaoDb from '../../persistance/models/dao/usersDao/usersDaoDb.js';
+// import UsersDaoDb from '../../persistance/models/dao/usersDao/usersDaoDb.js';
+import UsersDaoFactory from "../../persistance/models/dao/usersDao/usersDaoFactory.js";
+// const usersDaoDb = new UsersDaoDb();
 
-const usersDaoDb = new UsersDaoDb();
+const usersDaoFactory = UsersDaoFactory.getDao();
 
 export async function getAll() {
-    return await usersDaoDb.getUsers();
+    return await usersDaoFactory.getUsers();
 };
 
 export async function addNew(user) {
-    return await usersDaoDb.saveUser(user);
+    return await usersDaoFactory.saveUser(user);
 };
 
 export async function getOne(id) {
-    return await usersDaoDb.getUser(id);
+    return await usersDaoFactory.getUser(id);
 };
 
 export async function deleteOne(id) {
-    return await usersDaoDb.deleteUser(id);
+    return await usersDaoFactory.deleteUser(id);
 };
 
 export async function updateOne(id, newUser) {
-    return await usersDaoDb.updateUser(id, newUser);
+    return await usersDaoFactory.updateUser(id, newUser);
 };
