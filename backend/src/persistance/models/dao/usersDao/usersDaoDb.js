@@ -41,7 +41,20 @@ class UsersDaoDb {
 
     async saveUser(user) {
         try {
-            return await userModel.create(user);
+            const searched = await userModel.findOne({ email: user.email }, this.projection);
+
+            if (!searched) {
+                return await userModel.create(user);
+            };
+
+            const userRegistered = {
+                message: "User already registered",
+                searched
+            };
+
+            console.log(userRegistered.message);
+
+            return userRegistered;
         }
 
         catch (err) {

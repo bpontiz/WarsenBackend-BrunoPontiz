@@ -9,12 +9,10 @@ usersController.getUsers = async (req, res) => {
 
 usersController.postUser = async (req, res) => {
     const user = req.body;
-    await addNew(user);
-    res.redirect('http://localhost:3000/');
-};
-
-usersController.authenticateUser = async (req, res) => {
-
+    const addedUser = await addNew(user);
+    addedUser.message ? 
+        res.redirect('http://localhost:3000/registered/failed') : 
+        res.redirect('http://localhost:3000/registered/successful/');
 };
 
 usersController.getUserById = async (req, res) => {
