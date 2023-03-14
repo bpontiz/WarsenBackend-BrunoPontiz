@@ -1,6 +1,4 @@
-// import UsersDaoDb from '../../persistance/models/dao/usersDao/usersDaoDb.js';
 import UsersDaoFactory from "../../persistance/models/dao/usersDao/usersDaoFactory.js";
-// const usersDaoDb = new UsersDaoDb();
 
 const usersDaoFactory = UsersDaoFactory.getDao();
 

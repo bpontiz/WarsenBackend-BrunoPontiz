@@ -7,6 +7,8 @@ usersRouter.get('/', usersController.getUsers);
 
 usersRouter.post('/', usersController.postUser);
 
+usersRouter.post('/password', usersController.authenticateUser);
+
 usersRouter.get('/:_id', usersController.getUserById);
 
 usersRouter.delete('/:_id', usersController.deleteUserById);

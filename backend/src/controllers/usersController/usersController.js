@@ -13,6 +13,10 @@ usersController.postUser = async (req, res) => {
     res.redirect('http://localhost:3000/');
 };
 
+usersController.authenticateUser = async (req, res) => {
+
+};
+
 usersController.getUserById = async (req, res) => {
     const id = req.params._id;
     const getUser = await getOne(id);
