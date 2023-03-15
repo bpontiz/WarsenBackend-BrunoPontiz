@@ -6,6 +6,14 @@ export async function getAll() {
     return await usersDaoFactory.getUsers();
 };
 
+export async function authLocal() {
+    return await usersDaoFactory.authLocal();
+}
+
+export async function getAuth(user) {
+    return await usersDaoFactory.authLogin(user);
+}
+
 export async function addNew(user) {
     return await usersDaoFactory.saveUser(user);
 };

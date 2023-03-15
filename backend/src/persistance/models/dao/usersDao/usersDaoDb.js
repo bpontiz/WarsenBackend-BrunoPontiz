@@ -2,7 +2,7 @@ import userModel from "../../mongo/usersMongoModel.js";
 import ConfigUsers from "../../../dbconnections/mongo/users/configUsersDb.js";
 import MongoClient from "../../../dbconnections/mongo/users/mongoDbConnection.js";
 
-
+let userAuthenticator = {};
 class UsersDaoDb {
     constructor() {
         this.client = new MongoClient()
@@ -34,9 +34,47 @@ class UsersDaoDb {
 
         if (!searched) {
             console.log(`ERR! User with id = ${id} does not exist.`);
+            return [searched];
         };
 
         return searched;
+    };
+
+    async authLocal() {
+        try {
+            console.log(`User login successful!`);
+            return userAuthenticator.found;
+        }
+
+        catch (err) {
+            console.log('ERR! Could not authenticate user login', err);
+        }
+    };
+
+    async authLogin(user) {
+        let searched;
+
+        try {
+            searched = await userModel.findOne({ username: user.username, password: user.password }, this.projection);
+
+            if (searched) {
+                userAuthenticator.found = searched;
+                return searched;
+            };
+
+            const noUser = {
+                message: "User does not exist.",
+                searched
+            };
+
+            console.log(noUser.message);
+
+            return noUser;
+        }
+
+        catch (err) {
+            console.log('ERR! Could not authenticate user login', err);
+        }
     };
 
     async saveUser(user) {

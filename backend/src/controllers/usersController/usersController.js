@@ -1,10 +1,23 @@
-import { getAll, addNew, getOne, deleteOne, updateOne } from '../../services/userService/userService.js';
+import { getAll, addNew, getOne, deleteOne, updateOne, getAuth, authLocal } from '../../services/userService/userService.js';
 
 const usersController = {};
 
 usersController.getUsers = async (req, res) => {
     const getUsers = await getAll();
     res.json(getUsers);
+};
+
+usersController.authenticateLocal = async (req, res) => {
+    const authenticateUser = await authLocal();
+    res.json(authenticateUser);
+}
+
+usersController.authenticateUser = async (req, res) => {
+    const user = req.body;
+    const authenticateUser = await getAuth(user);
+    authenticateUser.message ?
+        res.redirect('http://localhost:3000/logged/failed') :
+        res.redirect('http://localhost:3000/logged');
 };
 
 usersController.postUser = async (req, res) => {
