@@ -19,7 +19,7 @@ app.use(express.urlencoded( { extended: true }));
 app.get('/', (req, res) => {
     res.send(`
     <h1>BACKEND APP</h1>
-    <h4>Desafio Clase 40: Factory, DAO y DTO</h4>`);
+    <h4>Desafio Clase 41: API Testing</h4>`);
 });
 
 app.use('/api/products', productsRouter);
