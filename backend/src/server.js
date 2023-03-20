@@ -16,20 +16,20 @@ app.use(express.json());
 
 app.use(express.urlencoded( { extended: true }));
 
+app.use(express.static("/public"));
+
 app.get('/', (req, res) => {
-    res.send(`
-    <h1>BACKEND APP</h1>
-    <h4>Desafio Clase 41: API Testing</h4>`);
+    res.sendFile('index.html', {root: 'src/public'});
 });
 
 app.use('/api/products', productsRouter);
 
 app.use('/api/users', usersRouter);
 
-app.get('*', (req, res) => {
-    const url = req.url;
-    res.send(`404 ERR - No resource has been found at: <br><strong>${url}</strong></br>`);
-});
+// app.get('*', (req, res) => {
+//     const url = req.url;
+//     res.send(`404 ERR - No resource has been found at: <br><strong>${url}</strong></br>`);
+// });
 
 const server = app.listen(port, () => console.log(`Server is running at http://localhost:${port}`));
 
