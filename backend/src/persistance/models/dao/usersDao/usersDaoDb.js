@@ -54,22 +54,41 @@ class UsersDaoDb {
     async authLogin(user) {
         let searched;
 
-        try {
-            searched = await userModel.findOne({ username: user.username, password: user.password }, this.projection);
+        let isMatch;
 
-            if (searched) {
+        try {
+            searched = await userModel.findOne({ username: user.username }, this.projection);
+
+            searched ?
+                isMatch = await searched.matchPassword(user.password) :
+                isMatch = false;
+
+            if (searched && isMatch) {
                 userAuthenticator.found = searched;
                 return searched;
             };
 
-            const noUser = {
-                message: "User does not exist.",
-                searched
+            if (!searched) {
+                const noUser = {
+                    message: "User does not exist.",
+                    searched
+                };
+    
+                console.log(noUser.message);
+    
+                return noUser;
             };
 
-            console.log(noUser.message);
-
-            return noUser;
+            if (!isMatch) {
+                const noMatch = {
+                    message: "Incorrect password.",
+                    searched
+                };
+    
+                console.log(noMatch.message);
+    
+                return noMatch;
+            };
         }
 
         catch (err) {
@@ -82,7 +101,11 @@ class UsersDaoDb {
             const searched = await userModel.findOne({ email: user.email }, this.projection);
 
             if (!searched) {
-                return await userModel.create(user);
+                let newUser = new userModel({...user});
+                console.log(newUser);
+                newUser.password = await newUser.encryptPassword(user.password);
+                console.log(newUser);
+                return await userModel.create(newUser);
             };
 
             const userRegistered = {
