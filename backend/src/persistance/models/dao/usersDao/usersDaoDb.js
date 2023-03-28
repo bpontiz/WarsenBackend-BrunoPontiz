@@ -102,8 +102,8 @@ class UsersDaoDb {
 
             if (!searched) {
                 let newUser = new userModel({...user});
-                console.log(newUser);
                 newUser.password = await newUser.encryptPassword(user.password);
+                newUser.passwordRepeated = await newUser.encryptPassword(user.passwordRepeated);
                 console.log(newUser);
                 return await userModel.create(newUser);
             };

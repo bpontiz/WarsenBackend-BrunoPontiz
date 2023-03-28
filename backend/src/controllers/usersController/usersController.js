@@ -22,10 +22,15 @@ usersController.authenticateUser = async (req, res) => {
 
 usersController.postUser = async (req, res) => {
     const user = req.body;
-    const addedUser = await addNew(user);
-    addedUser.message ? 
-        res.redirect('http://localhost:3000/registered/failed') : 
-        res.redirect('http://localhost:3000/registered/successful/');
+
+    if (user.password === user.passwordRepeated) {
+        const addedUser = await addNew(user);
+        addedUser.message ? 
+            res.redirect('http://localhost:3000/registered/failed') : 
+            res.redirect('http://localhost:3000/registered/successful/');
+    };
+
+    res.redirect('http://localhost:3000/registered/passFailed');
 };
 
 usersController.getUserById = async (req, res) => {
