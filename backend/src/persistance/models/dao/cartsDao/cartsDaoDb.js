@@ -38,10 +38,13 @@ class CartsDaoDb {
     };
 
     async saveCart(cart) {
+        let time = new Date().toLocaleString();
+
         try {
-            await cartsModel.create(cart);
-            console.log(`New cart from ${cart.email} successfully added.`);
-            return cart;
+            const newCart = { ...cart, date: time};
+            await cartsModel.create(newCart);
+            console.log(`New cart from ${newCart.email} successfully added.`);
+            return newCart;
         }
 
         catch(err) {

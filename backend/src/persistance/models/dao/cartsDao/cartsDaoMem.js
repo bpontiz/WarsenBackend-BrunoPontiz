@@ -23,12 +23,13 @@ class CartsDaoMem {
 
     saveCart(cart) {
         let id = 1;
+        let time = new Date().toLocaleString();
 
         const lastCartId = this.carts.length === 0 ?
             id :
             this.carts[this.carts.length - 1].id + 1;
 
-        const newCart = { ...cart, id: lastCartId};
+        const newCart = { ...cart, id: lastCartId, date: time};
         this.carts.push(newCart);
         console.log(`Cart ${newCart.name} successfully added.`);
         return newCart;
