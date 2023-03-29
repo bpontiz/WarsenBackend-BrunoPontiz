@@ -1,7 +1,6 @@
 import ConfigProducts from '../../../dbconnections/mongo/products/configProductsDb.js';
 import MongoClient from '../../../dbconnections/mongo/products/mongoDbConnection.js';
 import productModel from '../../mongo/productsMongoModel.js';
-
 class ProductsDaoDb {
     constructor() {
         this.client = new MongoClient()

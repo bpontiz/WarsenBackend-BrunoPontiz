@@ -2,6 +2,7 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import productsRouter from './routers/productsRouter/productsRouter.js';
 import usersRouter from './routers/usersRouter/usersRouter.js';
+import cartsRouter from './routers/cartsRouter/cartsRouter.js';
 import cors from 'cors';
 
 dotenv.config();
@@ -25,6 +26,13 @@ app.get('/', (req, res) => {
 app.use('/api/products', productsRouter);
 
 app.use('/api/users', usersRouter);
+
+app.use('/api/carts', cartsRouter);
+
+app.use('*', (req, res) => {
+    const url = req.url;
+    res.send(`404 Error! Could not access to ${url} because there is no resource at it.`)
+});
 
 const server = app.listen(port, () => console.log(`Server is running at http://localhost:${port}`));
 

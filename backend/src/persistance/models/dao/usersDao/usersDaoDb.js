@@ -42,7 +42,6 @@ class UsersDaoDb {
 
     async authLocal() {
         try {
-            console.log(`User login successful!`);
             return userAuthenticator.found;
         }
 
