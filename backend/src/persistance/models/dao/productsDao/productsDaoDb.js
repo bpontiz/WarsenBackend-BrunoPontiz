@@ -89,7 +89,7 @@ class ProductsDaoDb {
 
         else {
             console.log(`Product with id = ${id} successfully updated.`);
-        }
+        };
 
         return newProduct;
     };

@@ -7,4 +7,10 @@ cartsRouter.get('/', cartsController.getCarts);
 
 cartsRouter.post('/', cartsController.postCart);
 
+cartsRouter.get('/:_id', cartsController.getCartById);
+
+cartsRouter.delete('/:_id', cartsController.deleteCartById);
+
+cartsRouter.put('/:_id', cartsController.updateCartById);
+
 export default cartsRouter;
