@@ -56,6 +56,17 @@ class UsersDaoDb {
         let isMatch;
 
         try {
+            if(user === {}) {
+                const noUser = {
+                    message: "User has not been authenticated.",
+                    searched
+                };
+    
+                console.log(noUser.message);
+    
+                return noUser;
+            }
+
             searched = await userModel.findOne({ username: user.username }, this.projection);
 
             searched ?
@@ -81,7 +92,7 @@ class UsersDaoDb {
             if (!isMatch) {
                 const noMatch = {
                     message: "Incorrect password.",
-                    searched
+                    ...searched
                 };
     
                 console.log(noMatch.message);

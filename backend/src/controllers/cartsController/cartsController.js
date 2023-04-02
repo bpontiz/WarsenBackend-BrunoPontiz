@@ -1,4 +1,4 @@
-import { getAll, addCart, getCart, deleteCart, updateCart } from "../../services/cartsService/cartsService.js";
+import { getAll, addCart, getCart, deleteCart, updateCart, getCartByEmail } from "../../services/cartsService/cartsService.js";
 
 const cartsController = {};
 
@@ -11,6 +11,12 @@ cartsController.postCart = async (req, res) => {
     const postCart = req.body;
     await addCart(postCart);
     res.json(postCart);
+};
+
+cartsController.getCartByEmail = async (req, res) => {
+    const email = req.params.email;
+    const getCart = await getCartByEmail(email);
+    res.json(getCart);
 };
 
 cartsController.getCartById = async (req, res) => {

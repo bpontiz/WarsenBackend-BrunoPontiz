@@ -7,6 +7,8 @@ cartsRouter.get('/', cartsController.getCarts);
 
 cartsRouter.post('/', cartsController.postCart);
 
+cartsRouter.get('/filter/:email', cartsController.getCartByEmail);
+
 cartsRouter.get('/:_id', cartsController.getCartById);
 
 cartsRouter.delete('/:_id', cartsController.deleteCartById);

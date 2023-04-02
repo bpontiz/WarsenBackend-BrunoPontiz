@@ -52,6 +52,36 @@ class CartsDaoDb {
         }
     };
 
+    async getCartByEmail(email) {
+        let searched;
+
+        let filterSearched = [];
+
+        try {
+            searched = await cartsModel.find({}, this.projection);
+
+            for(let i of searched) {
+                if(i.email === email) {
+                    filterSearched.push(i);
+                }
+            };
+
+            // const filterSearched = searched.filter( user => user.email === email);
+
+            if( filterSearched.length === 0 ) {
+                console.log(`Cart is empty.`);
+            }
+            
+            else {
+                return filterSearched;
+            }
+        }
+
+        catch(err) {
+            console.log('ERR! Could not get cart by user email.', err);
+        }
+    }
+
     async deleteCart(id) {
         let deleted;
         let searched;

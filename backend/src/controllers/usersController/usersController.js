@@ -9,7 +9,9 @@ usersController.getUsers = async (req, res) => {
 
 usersController.authenticateLocal = async (req, res) => {
     const authenticateUser = await authLocal();
-    res.json(authenticateUser);
+    authenticateUser ?
+        res.json(authenticateUser) :
+        res.json({});
 }
 
 usersController.authenticateUser = async (req, res) => {

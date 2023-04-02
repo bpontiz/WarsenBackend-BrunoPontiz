@@ -10,6 +10,10 @@ export async function addCart(cart) {
     return await cartsDaoFactory.saveCart(cart);
 };
 
+export async function getCartByEmail(email) {
+    return await cartsDaoFactory.getCartByEmail(email);
+}
+
 export async function getCart(id) {
     return await cartsDaoFactory.getCart(id);
 };

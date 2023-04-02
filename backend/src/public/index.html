@@ -7,68 +7,22 @@
     <title>Warsen App</title>
 </head>
 <body>
-    <h1 class="title">Warsen Backend App</h1>
+    <h1 class="title" style="color: navy;">Warsen Backend App</h1>
 
-    <p>To get products, visit: <a href="http://localhost:8081/api/products">http://localhost:8081/api/products</a></p>
+    <label for="">To get <strong>products</strong>, visit: </label>
 
-    <p>To get users, visit: <a href="http://localhost:8081/api/users">http://localhost:8081/api/users</a></p>
+    <a href="http://localhost:8081/api/products" style="text-decoration: none;"><button style="min-width: 100px; cursor: pointer;">Products</button></a>
 
-    <label>Query</label><br>
+    <br><br>
 
-    <textarea name="query" id="query" cols="35" rows="15"></textarea><br>
+    <label for="">To get <strong>users</strong>, visit: </label>
 
-    <button id="btnSendQuery">Send query to GraphQL</button>
+    <a href="http://localhost:8081/api/users" style="text-decoration: none;"><button style="min-width: 100px; cursor: pointer;">Users</button></a>
+
+    <br><br>
     
-    <p id="response"></p>
+    <label for="">To get <strong>carts</strong>, visit: </label>
 
-    <script>
-        const inputQuery = document.getElementById('query');
-        const btnSendQuery = document.getElementById('btnSendQuery');
-
-        btnSendQuery.addEventListener('click', clickHandler)
-
-        async function clickHandler() {
-            const query =getQuery();
-            const data = await sendQuery(query);
-            render(data);
-        }
-
-        function getQuery() {
-
-            const wholeQuery = inputQuery.value;
-
-            const indexStart = inputQuery.selectionStart;
-            const indexEnd = inputQuery.selectionEnd;
-            const selection = wholeQuery.substring(indexStart, indexEnd);
-
-            return selection || wholeQuery;
-        }
-
-        async function sendQuery(query) {
-            try {
-                const response = await fetch('/api/products/graphql/queries', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        query
-                    })
-                })
-                const data = await response.json();
-                return data;
-            } catch (error) {
-                return error;
-            };
-
-        }
-
-        function render(data) {
-            const html = JSON.stringify(data, null, 2);
-            response.innerHTML = `<pre>${html}</pre>`;
-        }
-
-    </script>
+    <a href="http://localhost:8081/api/carts" style="text-decoration: none;"><button style="min-width: 100px; cursor: pointer;">Carts</button></a>
 </body>
 </html>

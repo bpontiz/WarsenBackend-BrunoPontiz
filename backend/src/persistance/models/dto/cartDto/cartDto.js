@@ -1,12 +1,12 @@
 export default class CartDto {
-    constructor(username, name, price, image, quantity, address, email) {
-        this.username = username
-        this.address = address
+    constructor(email, name, price, image, quantity, details, address) {
         this.email = email
         this.name = name
         this.price = price
-        this.image = image
         this.quantity = quantity
+        this.image = image
+        this.details = details
+        this.address = address
     }
 };
 
