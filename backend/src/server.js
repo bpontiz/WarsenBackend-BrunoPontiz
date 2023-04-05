@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import productsRouter from './routers/productsRouter/productsRouter.js';
 import usersRouter from './routers/usersRouter/usersRouter.js';
 import cartsRouter from './routers/cartsRouter/cartsRouter.js';
+import chatsRouter from './routers/chats/chatsRouter.js';
 import cors from 'cors';
 
 dotenv.config();
@@ -28,6 +29,8 @@ app.use('/api/products', productsRouter);
 app.use('/api/users', usersRouter);
 
 app.use('/api/carts', cartsRouter);
+
+app.use('/api/chats', chatsRouter);
 
 app.use('*', (req, res) => {
     const url = req.url;
