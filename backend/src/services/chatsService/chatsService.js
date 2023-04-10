@@ -2,6 +2,10 @@ import ChatsDaoFactory from '../../persistance/models/dao/chatsDao/chatsDaoFacto
 
 const chatsDaoFactory = ChatsDaoFactory.getDao();
 
-export async function getAll() {
-    return await chatsDaoFactory.getChats();
+export async function getOne(username) {
+    return await chatsDaoFactory.getChat(username);
+};
+
+export async function saveOne(message) {
+    return await chatsDaoFactory.saveMessage(message);
 };

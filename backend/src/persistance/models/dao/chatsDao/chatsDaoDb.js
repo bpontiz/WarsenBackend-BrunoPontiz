@@ -1,6 +1,7 @@
 import ConfigChatsDb from "../../../dbconnections/mongo/chats/configChatsDb.js";
 import MongoClient from "../../../dbconnections/mongo/chats/mongoDbConnection.js";
 import chatsModel from "../../mongo/chatsMongoModel.js";
+import io from '../../../../server.js';
 
 class ChatDaoDb {
     constructor() {
@@ -9,33 +10,36 @@ class ChatDaoDb {
         this.projection = ConfigChatsDb.db.projection
     }
 
-    async getChats() {
-        try {
-            const searched = await chatsModel.find({}, this.projection).lean();
-            return searched;
-        }
+    #stablishConnection(io, chat) {
+        return io.on('connection', socket => {
+            console.log('New client is online.');
 
-        catch(err) {
-            console.log('ERR! Could not get chats.', err);
-        }
-    };
+            socket.emit('messages', chat);
+
+            socket.on('new-message', data => {
+                chat.create(data);
+                socket.emit('messages', chat);
+            })
+        });
+    }
 
     async saveMessage(message) {
         let time = new Date().toLocaleString();
 
         try {
-            const newCart = { ...cart, date: time};
-            await chatsModel.create(newCart);
-            console.log(`New cart from ${newCart.email} successfully added.`);
-            return newCart;
+            const newMessage = { ...message, date: time};
+            await chatsModel.create(newMessage);
+            console.log(`New message from ${newMessage.username} successfully saved.`);
+            this.#stablishConnection(io, newMessage.body)
+            return newMessage;
         }
 
         catch(err) {
-            console.log('ERR! Could not add new cart.', err);
+            console.log('ERR! Could not save new message.', err);
         }
     };
 
-    async getChat(email) {
+    async getChat(username) {
         let searched;
 
         let filterSearched = [];
@@ -44,49 +48,26 @@ class ChatDaoDb {
             searched = await chatsModel.find({}, this.projection);
 
             for(let i of searched) {
-                if(i.email === email) {
+                if(i.username === username) {
                     filterSearched.push(i);
                 }
             };
 
-            // const filterSearched = searched.filter( user => user.email === email);
-
             if( filterSearched.length === 0 ) {
-                console.log(`Cart is empty.`);
+                console.log(`Chat is empty.`);
+                return {};
             }
             
             else {
+                this.#stablishConnection(io, filterSearched.body);
                 return filterSearched;
             }
         }
 
         catch(err) {
-            console.log('ERR! Could not get cart by user email.', err);
+            console.log('ERR! Could not get message by user.', err);
         }
     }
-
-    async deleteCart(id) {
-        let deleted;
-        let searched;
-
-        try {
-            searched = await chatsModel.findOne({ _id: id }, this.projection);
-            deleted = await chatsModel.deleteOne({ _id: id });
-            deleted.deletedCount != 0 ?
-                console.log(`Cart with id = ${id} successfully deleted.`) :
-                null;
-        }
-
-        catch (err) {
-            console.log('ERR! Could not delete cart.', err);
-        };
-
-        if (!searched) {
-            console.log(`ERR! Could not find cart with id = ${id}`);
-        };
-
-        return searched;
-    };
 
 };
 

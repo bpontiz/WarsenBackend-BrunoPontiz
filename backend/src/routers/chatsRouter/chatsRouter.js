@@ -3,6 +3,8 @@ import chatsController from '../../controllers/chatsController/chatsController.j
 
 const chatsRouter = Router();
 
-chatRouter.get('/', chatsController.getChats);
+chatsRouter.get('/:username', chatsController.getChat);
+
+chatsRouter.post('/', chatsController.postChat);
 
 export default chatsRouter;

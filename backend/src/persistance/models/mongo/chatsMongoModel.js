@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import ConfigChats from '../../dbconnections/mongo/chats/configChatsDb.js';
 
 const chatsSchema = new mongoose.Schema({
+    username: {type: String, required: true},
     email: {type: String, required: true},
     date: {type: String, required: true},
     type: {type: String, required: true},

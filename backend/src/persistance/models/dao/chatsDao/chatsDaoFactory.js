@@ -1,5 +1,5 @@
-import ChatDaoDb from "./ChatDaoDb.js";
-import ChatDaoMem from "./ChatDaoMem.js";
+import ChatDaoDb from "./chatsDaoDb.js";
+import ChatDaoMem from "./chatsDaoMem.js";
 
 const option = process.argv[2] || 'mongodb';
 
@@ -17,7 +17,7 @@ switch (option) {
         break
 };
 
-export default class CartsDaoFactory {
+export default class ChatsDaoFactory {
     static getDao() {
         return dao;
     }

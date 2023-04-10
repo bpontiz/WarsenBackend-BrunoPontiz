@@ -3,12 +3,18 @@ import * as dotenv from 'dotenv';
 import productsRouter from './routers/productsRouter/productsRouter.js';
 import usersRouter from './routers/usersRouter/usersRouter.js';
 import cartsRouter from './routers/cartsRouter/cartsRouter.js';
-import chatsRouter from './routers/chats/chatsRouter.js';
+import chatsRouter from './routers/chatsRouter/chatsRouter.js';
 import cors from 'cors';
+import { Server as HttpServer } from 'http';
+import { Server as IOServer } from 'socket.io';
 
 dotenv.config();
 
 const app = express();
+
+const httpServer = new HttpServer(app);
+
+const io = new IOServer(httpServer);
 
 const port = process.env.PORT || 8080;
 
@@ -40,3 +46,5 @@ app.use('*', (req, res) => {
 const server = app.listen(port, () => console.log(`Server is running at http://localhost:${port}`));
 
 server.on('error', (err) => console.log(`SERVER ERR! ${err}`));
+
+export default io;
