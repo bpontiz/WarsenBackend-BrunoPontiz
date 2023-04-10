@@ -8,12 +8,12 @@ let dao;
 switch (option) {
     case 'mem':
         dao = new ChatDaoMem();
-        console.log(`Switching to Cart Persistance: RAM Memory`);
+        console.log(`Switching to Chat Persistance: RAM Memory`);
         break
     
     default:
         dao = new ChatDaoDb();
-        console.log(`Switching to Cart Persistance: Mongo DataBase`);
+        console.log(`Switching to Chat Persistance: Mongo DataBase`);
         break
 };
 
