@@ -1,6 +1,7 @@
 import ConfigChatsDb from "../../../dbconnections/mongo/chats/configChatsDb.js";
 import MongoClient from "../../../dbconnections/mongo/chats/mongoDbConnection.js";
 import chatsModel from "../../mongo/chatsMongoModel.js";
+import userModel from "../../mongo/usersMongoModel.js";
 import io from '../../../../server.js';
 
 class ChatDaoDb {
@@ -26,8 +27,11 @@ class ChatDaoDb {
     async saveMessage(message) {
         let time = new Date().toLocaleString();
 
+        const userType = process.argv[3] || 'user';
+
         try {
-            const newMessage = { ...message, date: time};
+            const getUser = await userModel.findOne({username: message.username}, this.projection);
+            const newMessage = { ...message, date: time, type: userType, email: getUser.email};
             await chatsModel.create(newMessage);
             console.log(`New message from ${newMessage.username} successfully saved.`);
             this.#stablishConnection(io, newMessage.body)
