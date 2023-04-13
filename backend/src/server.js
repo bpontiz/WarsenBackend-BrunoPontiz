@@ -4,6 +4,7 @@ import productsRouter from './routers/productsRouter/productsRouter.js';
 import usersRouter from './routers/usersRouter/usersRouter.js';
 import cartsRouter from './routers/cartsRouter/cartsRouter.js';
 import chatsRouter from './routers/chatsRouter/chatsRouter.js';
+import ordersRouter from './routers/ordersRouter/ordersRouter.js';
 import cors from 'cors';
 import http from 'http';
 import { Server as SocketServer } from "socket.io";
@@ -53,6 +54,8 @@ app.use('/api/users', usersRouter);
 app.use('/api/carts', cartsRouter);
 
 app.use('/api/chats', chatsRouter);
+
+app.use('/api/orders', ordersRouter);
 
 app.use('*', (req, res) => {
     const url = req.url;

@@ -7,6 +7,18 @@ productsController.getProducts = async (req, res) => {
     res.json(getProducts);
 };
 
+productsController.getProductsByCategory = async (req, res) => {
+    const category = req.params.category.toLowerCase();
+    if(category === 'shirts') {
+        const getProducts = await getAll();
+        res.json(getProducts);
+    }
+
+    else {
+        res.json('No category has been matched.');
+    };
+}
+
 productsController.postProduct = async (req, res) => {
     const product = req.body;
     await addNew(product);
