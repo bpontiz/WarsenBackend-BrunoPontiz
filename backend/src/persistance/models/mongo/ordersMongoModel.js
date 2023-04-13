@@ -3,7 +3,7 @@ import ConfigOrdersDb from '../../dbconnections/mongo/orders/configOrdersDb.js';
 
 const ordersSchema = new mongoose.Schema({
     items: {
-        description: {type: String, required: true}
+        description: {type: Array, required: true}
     },
     email: {type: String, required: true},
     date: {type: String, required: true},
