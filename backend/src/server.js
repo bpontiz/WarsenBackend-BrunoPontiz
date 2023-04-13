@@ -37,12 +37,12 @@ app.get('/', (req, res) => {
 io.on("connection", (socket) => {
     console.log(socket.id);
 
-    socket.on("message", (body) => {
+    socket.on("message", (message, username) => {
         socket.broadcast.emit("message", {
-            body,
-            from: socket.id,
+            body: message,
+            from: username,
+            type: 'Other'
         });
-        console.log(body);
     });
 });
 
