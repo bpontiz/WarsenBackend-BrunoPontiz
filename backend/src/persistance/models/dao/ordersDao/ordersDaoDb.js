@@ -1,6 +1,7 @@
 import ConfigOrdersDb from "../../../dbconnections/mongo/orders/configOrdersDb.js";
 import MongoClient from "../../../dbconnections/mongo/orders/mongoDbConnection.js";
 import ordersModel from "../../mongo/ordersMongoModel.js";
+import {detailGmail} from '../../../../services/ordersService/ordersMailing.js';
 
 class OrdersDaoDb {
     constructor() {
@@ -24,7 +25,7 @@ class OrdersDaoDb {
         }
     };
 
-    async getCart(id) {
+    async getOrder(id) {
         let searched;
 
         try {
@@ -32,11 +33,11 @@ class OrdersDaoDb {
         }
 
         catch(err) {
-            console.log(`ERR! Could not get cart.`, err);
+            console.log(`ERR! Could not get order.`, err);
         }
 
         if(!searched) {
-            console.log(`ERR! Could not get cart with id = ${id}.`, err);
+            console.log(`ERR! Could not get order with id = ${id}.`, err);
         }
     };
 
@@ -45,8 +46,6 @@ class OrdersDaoDb {
 
         try {
             const findOrders = await ordersModel.find({}, this.projection).lean();
-
-            console.log(findOrders);
 
             async function saveOrderIntoDb(newOrder) {
                 await ordersModel.create(newOrder);
@@ -57,12 +56,15 @@ class OrdersDaoDb {
             if(findOrders.length == 0) {
                 const newOrderNumber = 0;
                 const newOrder = { ...order, date: time, orderNumber: newOrderNumber + 1};
+                detailGmail(newOrder.email, newOrder);
                 return saveOrderIntoDb(newOrder);
             }
 
             else {
                 const findLastOrderNumber = findOrders[findOrders.length - 1].orderNumber;
                 const newOrder = { ...order, date: time, orderNumber: findLastOrderNumber + 1};
+                console.log(newOrder);
+                detailGmail(newOrder.email, newOrder);
                 return saveOrderIntoDb(newOrder);
             };
         }
@@ -122,29 +124,6 @@ class OrdersDaoDb {
 
         return searched;
     };
-
-    async updateCart(id, newCart) {
-        let result;
-
-        try {
-            result = await ordersModel.findOneAndReplace({ _id: id }, newCart);
-        }
-
-        catch(err) {
-            console.log('ERR! Could not update cart.', err);
-        }
-
-        if (!result) {
-            console.log(`ERR! Could not find cart with id = ${id}`, { id });
-        }
-
-        else {
-            console.log(`Cart with id = ${id} successfully updated.`);
-        };
-
-        return newCart;
-    };
-
 };
 
 export default OrdersDaoDb;
