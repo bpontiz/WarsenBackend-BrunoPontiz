@@ -1,3 +1,33 @@
+Aclaraciones Entrega Final:
+    Hola profe. El proyecto consta de dos aplicaciones desplegadas con servidores distintos, que estan interconectadas entre sí. Por un lado el backend, y por otro el frontend (desarrollado con React.js), que consume al backend como si este último fuera la API REST (modelo data on wire). El backend gestiona y utiliza una base de datos no relacional desarrollada en MongoDB, haciendo uso de su característica remota de Mongo Atlas. A lo largo de la aplicación se utiliza como ORM a Mongoose para escribir código de base de datos más fácilmente.
+
+    Instalación:
+        git clone https://github.com/bpontiz/ArquitecturaAPI-BrunoPontiz.git
+
+    Uso:
+        Entrar a la carpeta "backend"
+            cd ../backend
+
+        Instalar las dependencias
+            npm install
+
+        Luego con el siguiente comando se inicializa el servidor backend:
+            npm run dev
+    
+    Una vez hecho esto, puede inicializarse el servidor de frontend desde una carpeta separada.
+    Instalación:
+        git clone https://github.com/bpontiz/Warsen-BrunoPontiz.git
+
+    Uso:
+        Instalamos las dependencias
+            npm install
+
+        Luego desplegamos la aplicación con el comando:
+            npm start
+
+    Recomendación:
+        Registrarse en la aplicación de frontend Warsen utilizando su correo electrónico verdadero (luego de efectuar una compra la app le enviará un correo que usted puede chequear). Luego iniciar sesión y elegir sus camisetas de fútbol favoritas. Posteriormente puede realizar la compra (no posee funcionalidad de pago ni pide datos de entidades bancarias), dado que esto es aún simulado.
+
 Aclaraciones desafio clase 41: API Testing
 
     Sobre comandos para ejecutar distintos modulos de la app
