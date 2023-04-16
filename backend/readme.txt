@@ -26,7 +26,7 @@ Aclaraciones Entrega Final:
             npm start
 
     Recomendación:
-        Registrarse en la aplicación de frontend Warsen utilizando su correo electrónico verdadero (luego de efectuar una compra la app le enviará un correo que usted puede chequear). Luego iniciar sesión y elegir sus camisetas de fútbol favoritas. Posteriormente puede realizar la compra (no posee funcionalidad de pago ni pide datos de entidades bancarias), dado que esto es aún simulado.
+        Registrarse en la aplicación de frontend Warsen utilizando su correo electrónico verdadero (luego de efectuar una compra la app le enviará un correo que usted puede chequear). Luego iniciar sesión y elegir sus camisetas de fútbol favoritas. Posteriormente puede realizar la compra (no posee funcionalidad de pago ni pide datos de entidades bancarias), dado que esto es aún simulado. Por otro lado, el apartado de frontend correspondiente a Contact, presenta la vista del chat de backend implementado con Websockets. Para probar esta funcionalidad, se recomienda no iniciar sesion. Abrir la aplicación en dos pestañas distintas y comenzar a chatear. Los mensajes se guardan en una base de datos, pero el acceso desde la aplicación es a través de memoria ram.
 
 Aclaraciones desafio clase 41: API Testing
 
