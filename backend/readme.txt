@@ -11,6 +11,12 @@ Aclaraciones Entrega Final:
         Instalar las dependencias
             npm install
 
+        Crear un archivo llamado .env
+            Definir las siguientes variables y completarlas con los datos que envié en la caja de comentarios de la entrega final del proyecto
+                PORT = 
+                DB_NAME =
+                DB_URL =
+
         Luego con el siguiente comando se inicializa el servidor backend:
             npm run dev
     
