@@ -38,10 +38,10 @@ const detailGmail = async (email, product) => {
         email :
         'elon.musk@tesla.com';
 
-    const emailSubject = 'Clothing Order';
+    const emailSubject = 'Football shipping';
 
     const emailHtml = `<h2>Hello!</h2><h3>Your order is on its way.</h3>
-    We are glad you have ordered the following shirt/s: <strong>${product.items.description}</strong> (quantity) on date ${product.date}. Your order number is #00${product.orderNumber}.<br><br>We hope you enjoy your football shirt. See you soon!<br><br>Warsen - All rights are reserved to Bruno Pontiz`;
+    We are glad you have ordered the following shirt/s: <br><br><strong>${product.items.description}</strong> (quantity) on date ${product.date}.<br><br>Your order number is #00${product.orderNumber}.<br><br>We hope you enjoy your football shirt. See you soon!<br><br>Warsen - All rights are reserved to Bruno Pontiz`;
 
     const emailAttachments = [];
 
