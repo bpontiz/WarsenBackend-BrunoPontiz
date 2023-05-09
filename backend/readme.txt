@@ -2,7 +2,7 @@ Aclaraciones Entrega Final:
     Hola profe. El proyecto consta de dos aplicaciones desplegadas con servidores distintos, que estan interconectadas entre sí. Por un lado el backend, y por otro el frontend (desarrollado con React.js), que consume al backend como si este último fuera la API REST (modelo data on wire). El backend gestiona y utiliza una base de datos no relacional desarrollada en MongoDB, haciendo uso de su característica remota de Mongo Atlas. A lo largo de la aplicación se utiliza como ORM a Mongoose para escribir código de base de datos más fácilmente.
 
     Instalación:
-        git clone https://github.com/bpontiz/ArquitecturaAPI-BrunoPontiz.git
+        git clone https://github.com/bpontiz/WasenBackend-BrunoPontiz.git
 
     Uso:
         Entrar a la carpeta "backend"
