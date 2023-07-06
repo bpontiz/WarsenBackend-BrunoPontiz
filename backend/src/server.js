@@ -17,7 +17,9 @@ const server = http.createServer(app);
 
 const io = new SocketServer(server, {
     cors: {
-        origin: 'http://localhost:3000',
+        origin: ['https://warsen-bruno-pontiz.vercel.app/','http://localhost:3000'],
+        methods: ['GET', 'PUT', 'POST', 'DELETE'],
+        allowedHeaders: ['https://warsen-bruno-pontiz.vercel.app/']
     }
 });
 
